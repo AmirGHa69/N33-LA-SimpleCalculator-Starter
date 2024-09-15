@@ -2,11 +2,18 @@
 
 namespace SimpleCalculator
 {
-    public class InputConverter
+    public static class InputConverter
     {
-        public double ConvertInputToNumeric(string argTextInput)
+        public static double ConvertInputToNumeric(string argTextInput)
         {
-            return 0;
+            double result;
+            while (!double.TryParse(argTextInput, out result))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+                argTextInput = Console.ReadLine();
+            }
+
+            return result;
         }
     }
 }

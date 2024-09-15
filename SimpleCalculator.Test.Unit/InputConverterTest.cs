@@ -11,8 +11,8 @@ namespace SimpleCalculator.Test.Unit
         [TestMethod]
         public void ConvertsValidStringInputIntoDouble()
         {
-            string inputNumber = "5";
-            double convertedNumber = _inputConverter.ConvertInputToNumeric(inputNumber);
+            var inputNumber = "5";
+            var convertedNumber = _inputConverter.ConvertInputToNumeric(inputNumber);
             Assert.AreEqual(5, convertedNumber);
         }
 
@@ -20,8 +20,8 @@ namespace SimpleCalculator.Test.Unit
         [ExpectedException(typeof(ArgumentException))]
         public void FailsToConvertsInvalidStringInputIntoDouble()
         {
-            string inputNumber = "*";
-            double convertedNumber = _inputConverter.ConvertInputToNumeric(inputNumber);
+            var inputNumber = "*";
+            var convertedNumber = _inputConverter.ConvertInputToNumeric(inputNumber);
             Assert.AreEqual(2, convertedNumber);
         }
     }

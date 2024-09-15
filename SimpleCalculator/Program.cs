@@ -2,32 +2,45 @@
 
 namespace SimpleCalculator
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
-                // Class to convert user input
-                InputConverter inputConverter = new InputConverter();
-
                 // Class to perform actual calculations
-                CalculatorEngine calculatorEngine = new CalculatorEngine();
+                var calculatorEngine = new CalculatorEngine();
 
-                double firstNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
-                double secondNumber = inputConverter.ConvertInputToNumeric(Console.ReadLine());
-                string operation = Console.ReadLine();
+                Console.WriteLine("Enter the first number:");
+                var firstNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
 
-                double result = calculatorEngine.Calculate(operation, firstNumber, secondNumber);
+                Console.WriteLine("Enter the second number:");
+                var secondNumber = InputConverter.ConvertInputToNumeric(Console.ReadLine());
 
-                Console.WriteLine(result);
+                Console.WriteLine("Enter the operation (e.g., +, add, -, subtract, * multiply, /, divide):");
+                var operation = Console.ReadLine().ToLower();
 
-            } catch (Exception ex)
+                while (operation != "+" && operation != "add" &&
+                       operation != "-" && operation != "subtract" &&
+                       operation != "*" && operation != "multiply" &&
+                       operation != "/" && operation != "divide")
+                {
+                    Console.WriteLine(
+                        "Invalid operation. Please enter a valid operation (e.g., +, add, -, subtract, *, multiply, /, divide):");
+                    operation = Console.ReadLine().ToLower();
+                }
+
+                var result = calculatorEngine.Calculate(operation, firstNumber, secondNumber);
+
+                // Display the result in a human-readable format
+                var output = $"The value {firstNumber} {operation} {secondNumber} is equal to {result}.";
+                Console.WriteLine(output);
+            }
+            catch (Exception ex)
             {
                 // Normally, we'd log this error to a file.
                 Console.WriteLine(ex.Message);
             }
-
         }
     }
 }
